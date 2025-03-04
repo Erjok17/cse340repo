@@ -11,6 +11,10 @@ app.use(expressLayouts);
 app.set("layout", "layouts/layout"); // Path to your layout file
 
 
+// Serve Static Files (Fix)
+app.use(express.static(path.join(__dirname, "public"))); 
+
+
 
 // Routes
 app.get("/", (req, res) => {
@@ -22,3 +26,7 @@ const port = process.env.PORT || 5500;
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);
 });
+
+
+
+
