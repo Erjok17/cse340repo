@@ -17,22 +17,28 @@ body {
 header {
   text-align: left;
   padding: 15px;
+  position: relative; /* Ensure the header is a positioning context */
 }
 
 header h1 {
   font-size: 2rem;
   font-weight: bold;
   color: #2c3e50;
+  display: inline-block; /* Keep the h1 inline */
+  margin: 0; /* Remove default margin */
 }
 
-header a {
-  float: right;
+header .account-link {
+  position: absolute; /* Position the link absolutely within the header */
+  right: 15px; /* Align to the right */
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust for perfect vertical centering */
   font-size: 0.9rem;
-  color: #002244; /* Even darker color for better readability */
+  color: #002244; /* Darker color for better readability */
   text-decoration: none;
 }
 
-header a:hover {
+header .account-link:hover {
   text-decoration: underline;
 }
 
@@ -71,18 +77,23 @@ h2 {
   margin-top: 20px;
 }
 
-/* Reviews Section */
+/* Center the reviews section */
 .reviews {
-  text-align: left;
+  text-align: center; /* Centers text */
   max-width: 600px;
-  margin: 20px auto;
+  margin: 20px auto; /* Centers the section */
+  padding: 20px;
 }
 
+/* Ensure bullet points appear */
 .reviews ul {
-  list-style: none;
-  padding-left: 0;
+  list-style: disc; /* Adds bullet points */
+  padding-left: 20px; /* Indents bullet points */
+  text-align: left; /* Aligns list items to the left */
+  display: inline-block; /* Centers the list within the section */
 }
 
+/* Adjust list item spacing */
 .reviews li {
   margin: 10px 0;
   font-size: 1rem;
@@ -140,6 +151,7 @@ footer {
 p.copyright {
   color: #444; /* Darker color for better contrast */
 }
+
 /* Delorean Section */
 .delorean-section {
   position: relative;
