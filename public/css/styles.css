@@ -64,36 +64,6 @@ nav a:hover {
   border-radius: 5px;
 }
 
-/* Hero Section */
-.hero {
-  background-color: #f4f4f4;
-  padding: 20px;
-  border-radius: 8px;
-  margin: 20px auto;
-  max-width: 500px;
-}
-
-.hero img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 0 auto 10px;
-}
-
-.hero a {
-  display: inline-block;
-  background-color: #007bff;
-  color: white;
-  padding: 8px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.hero a:hover {
-  background-color: #0056b3;
-}
-
 /* Section Headings */
 h2 {
   font-size: 1.5rem;
@@ -164,4 +134,53 @@ footer {
   font-size: 0.8rem;
   margin-top: 20px;
   color: #666;
+}
+
+/* Delorean Section */
+.delorean-section {
+  position: relative;
+  text-align: center;
+  margin: 20px 0;
+  overflow: hidden; /* Prevent overflow */
+  height: 400px; /* Set a fixed height for the section */
+}
+
+.delorean-section img {
+  width: 100%;
+  height: 100%; /* Ensure the image covers the section */
+  object-fit: cover; /* Maintain aspect ratio */
+  display: block;
+}
+
+.text-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  width: 100%; /* Ensure text stays within bounds */
+  max-width: 800px; /* Adjust as needed */
+  padding: 0 20px; /* Add padding for better readability */
+}
+
+.text-overlay h1 {
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.text-overlay h2 {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+.text-overlay p {
+  font-size: 1.5rem;
+  margin: 5px 0;
+}
+
+.text-overlay .call-to-action {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 20px;
 }
