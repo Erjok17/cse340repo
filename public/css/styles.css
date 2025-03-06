@@ -8,7 +8,7 @@
 body {
   font-family: Arial, sans-serif;
   background-color: #fff;
-  color: #333;
+  color: #222; /* Darker text for better readability */
   text-align: center;
   padding: 10px;
 }
@@ -28,7 +28,7 @@ header h1 {
 header a {
   float: right;
   font-size: 0.9rem;
-  color: #333;
+  color: #002244; /* Even darker color for better readability */
   text-decoration: none;
 }
 
@@ -99,7 +99,7 @@ h2 {
 }
 
 .upgrade-item {
-  background-color: #00a6d6; /* Background color for each box */
+  background-color: #004d66; /* Even darker blue for better contrast */
   padding: 10px;
   border-radius: 8px;
   text-align: center;
@@ -118,7 +118,7 @@ h2 {
 
 .upgrade-item a {
   display: block;
-  color: white;
+  color: #ffffff; /* White text for contrast */
   font-size: 1rem;
   margin-top: 5px;
   text-decoration: none;
@@ -133,9 +133,13 @@ h2 {
 footer {
   font-size: 0.8rem;
   margin-top: 20px;
-  color: #666;
+  color: #666; /* Current color */
 }
 
+/* Adjust the copyright text color for better contrast */
+p.copyright {
+  color: #444; /* Darker color for better contrast */
+}
 /* Delorean Section */
 .delorean-section {
   position: relative;
@@ -157,7 +161,7 @@ footer {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
+  color: #ffffff; /* Ensures contrast with dark overlays */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
   width: 100%; /* Ensure text stays within bounds */
   max-width: 800px; /* Adjust as needed */

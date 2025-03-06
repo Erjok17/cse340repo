@@ -1,6 +1,6 @@
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
-const path = require("path"); // Add this to handle file paths
+const path = require("path");
 
 const app = express();
 
@@ -10,11 +10,8 @@ app.set("views", path.join(__dirname, "views")); // Set the views directory
 app.use(expressLayouts);
 app.set("layout", "layouts/layout"); // Path to your layout file
 
-
-// Serve Static Files (Fix)
-app.use(express.static(path.join(__dirname, "public"))); 
-
-
+// Serve Static Files
+app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 app.get("/", (req, res) => {
@@ -26,7 +23,3 @@ const port = process.env.PORT || 5500;
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);
 });
-
-
-
-
