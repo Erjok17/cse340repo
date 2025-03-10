@@ -161,6 +161,18 @@ p.copyright {
   height: 400px; /* Set a fixed height for the section */
 }
 
+.delorean-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  z-index: 1; /* Ensure the overlay is above the image */
+}
+
+
 .delorean-section img {
   width: 100%;
   height: 100%; /* Ensure the image covers the section */
@@ -173,11 +185,9 @@ p.copyright {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #ffffff; /* Ensures contrast with dark overlays */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  width: 100%; /* Ensure text stays within bounds */
-  max-width: 800px; /* Adjust as needed */
-  padding: 0 20px; /* Add padding for better readability */
+  color: #fff;
+  z-index: 2; /* Higher than the overlay */
+  text-align: center;
 }
 
 .text-overlay h1 {
@@ -199,4 +209,27 @@ p.copyright {
   font-size: 1.8rem;
   font-weight: bold;
   margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .upgrades {
+    grid-template-columns: 1fr; /* Single column on small screens */
+  }
+  .text-overlay h1 {
+    font-size: 2.5rem; /* Smaller font size for mobile */
+  }
+}
+
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  z-index: 1000;
+}
+.skip-link:focus {
+  top: 0;
 }
