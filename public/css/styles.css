@@ -77,41 +77,21 @@ h2 {
   margin-top: 20px;
 }
 
-/* Center the reviews section */
-.reviews {
-  text-align: center; /* Centers text */
-  max-width: 600px;
-  margin: 20px auto; /* Centers the section */
-  padding: 20px;
-  background-color: #f9f9f9; /* Light background for contrast */
-  color: #222; /* Dark text for readability */
+/* Container for Upgrades and Reviews Sections */
+.sections-container {
+  display: flex; /* Use flexbox for side-by-side layout */
+  justify-content: space-between; /* Space out the sections */
+  align-items: stretch; /* Stretch sections to the same height */
+  max-width: 1200px; /* Adjust as needed */
+  margin: 20px auto; /* Center the container */
+  padding: 0 20px; /* Add padding to the sides */
 }
 
-/* Ensure bullet points appear */
-.reviews ul {
-  list-style: disc; /* Adds bullet points */
-  padding-left: 20px; /* Indents bullet points */
-  text-align: left; /* Aligns list items to the left */
-  display: inline-block; /* Centers the list within the section */
-}
-
-/* Adjust list item spacing */
-.reviews li {
-  margin: 10px 0;
-  font-size: 1rem;
-  color: #222; /* Dark text for readability */
-}
 /* Upgrades Section */
 .upgrades-section {
+  flex: 1; /* Take up available space */
+  margin-right: 20px; /* Add space between sections */
   text-align: center;
-  margin: 20px auto;
-  max-width: 800px; /* Adjust as needed */
-}
-
-.upgrades-section h2 {
-  font-size: 2rem;
-  color: #2c3e50;
-  margin-bottom: 20px;
 }
 
 .upgrades {
@@ -153,6 +133,40 @@ h2 {
 
 .upgrade-item a:hover {
   text-decoration: underline;
+}
+
+/* Reviews Section */
+.reviews {
+  flex: 1; /* Take up available space */
+  text-align: center; /* Center text horizontally */
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background for contrast */
+  color: #222; /* Dark text for readability */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
+}
+
+.reviews h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.reviews ul {
+  list-style: disc; /* Adds bullet points */
+  padding-left: 20px; /* Indents bullet points */
+  text-align: left; /* Align list items to the left */
+  margin: 0; /* Remove default margin */
+}
+
+.reviews li {
+  margin: 10px 0;
+  font-size: 1rem;
+  color: #222; /* Dark text for readability */
 }
 /* Footer */
 footer {
@@ -196,30 +210,34 @@ p.copyright {
 /* Text Overlay Styling */
 .text-overlay {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 50%; /* Vertically center */
+  left: 20px; /* Position on the left side */
+  transform: translateY(-50%); /* Adjust vertical centering */
   color: #ffffff; /* Pure white for maximum contrast */
   z-index: 2; /* Higher than the overlay */
-  text-align: center;
+  text-align: left; /* Align text to the left */
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  padding: 20px; /* Add padding inside the box */
+  border-radius: 10px; /* Rounded corners */
+  max-width: 400px; /* Limit the width of the box */
 }
 
 .text-overlay h1 {
   font-size: 2.5rem;
   margin: 0;
-  color: #1e90ff; /* Pure white */
+  color: #1e90ff; /* Light blue for contrast */
 }
 
 .text-overlay h2 {
   font-size: 2rem;
   margin: 10px 0;
-  color: #1e90ff; /* Pure white */
+  color: #1e90ff; /* Light blue for contrast */
 }
 
 .text-overlay p {
   font-size: 1.5rem;
   margin: 5px 0;
-  color:  #1e90ff; /* Pure white */
+  color: #1e90ff; /* Light blue for contrast */
 }
 
 .text-overlay .call-to-action {
@@ -250,15 +268,15 @@ p.copyright {
 }
 
 @media (max-width: 768px) {
-  .upgrades {
-    grid-template-columns: 1fr; /* Single column on small screens */
+  .sections-container {
+    flex-direction: column; /* Stack sections vertically */
   }
-  .text-overlay h1 {
-    font-size: 2rem; /* Smaller font size for mobile */
+  .upgrades-section {
+    margin-right: 0; /* Remove right margin */
+    margin-bottom: 20px; /* Add space between sections */
   }
 }
 
-/* Skip Link */
 .skip-link {
   position: absolute;
   top: -40px;
@@ -272,4 +290,3 @@ p.copyright {
 .skip-link:focus {
   top: 0;
 }
-
