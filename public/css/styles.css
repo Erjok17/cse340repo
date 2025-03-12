@@ -101,27 +101,37 @@ h2 {
   font-size: 1rem;
   color: #222; /* Dark text for readability */
 }
+/* Upgrades Section */
+.upgrades-section {
+  text-align: center;
+  margin: 20px auto;
+  max-width: 800px; /* Adjust as needed */
+}
 
-/* Delorean Upgrades Section */
+.upgrades-section h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
 .upgrades {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2 columns */
   grid-template-rows: repeat(2, auto); /* 2 rows */
-  gap: 15px; /* Spacing between items */
-  max-width: 500px; /* Adjust as needed */
-  margin: 20px auto;
+  gap: 20px; /* Spacing between items */
 }
 
 .upgrade-item {
-  background-color: #004d66; /* Even darker blue for better contrast */
-  padding: 10px;
-  border-radius: 8px;
+  background-color: #004d66; /* Dark blue background */
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #ffffff; /* White text for contrast */
+  color: #ffffff; /* White text */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
 }
 
 .upgrade-item img {
@@ -129,13 +139,14 @@ h2 {
   max-width: 150px; /* Adjust image size */
   height: auto;
   border-radius: 5px;
+  margin-bottom: 10px; /* Space below the image */
 }
 
 .upgrade-item a {
   display: block;
-  color: #ffffff; /* White text for contrast */
-  font-size: 1rem;
-  margin-top: 5px;
+  color: #ffffff; /* White text */
+  font-size: 1.2rem;
+  margin-top: 10px;
   text-decoration: none;
   font-weight: bold;
 }
@@ -143,7 +154,6 @@ h2 {
 .upgrade-item a:hover {
   text-decoration: underline;
 }
-
 /* Footer */
 footer {
   font-size: 0.8rem;
@@ -172,7 +182,7 @@ p.copyright {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* Darker semi-transparent black overlay */
+  background: rgba(0, 0, 0, 0.1); /* Darker semi-transparent black overlay */
   z-index: 1; /* Ensure the overlay is above the image */
 }
 
@@ -197,19 +207,19 @@ p.copyright {
 .text-overlay h1 {
   font-size: 2.5rem;
   margin: 0;
-  color: #ffffff; /* Pure white */
+  color: #1e90ff; /* Pure white */
 }
 
 .text-overlay h2 {
   font-size: 2rem;
   margin: 10px 0;
-  color: #ffffff; /* Pure white */
+  color: #1e90ff; /* Pure white */
 }
 
 .text-overlay p {
   font-size: 1.5rem;
   margin: 5px 0;
-  color: #ffffff; /* Pure white */
+  color:  #1e90ff; /* Pure white */
 }
 
 .text-overlay .call-to-action {
@@ -217,6 +227,26 @@ p.copyright {
   font-weight: bold;
   margin-top: 20px;
   color: #ffcc00; /* Yellow for emphasis */
+}
+
+/* New styles for the CTA box */
+.cta-box {
+  display: inline-block; /* Makes the box wrap around the text */
+  padding: 10px 20px; /* Adds space inside the box */
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  border: 2px solid #ffcc00; /* Yellow border to match the text */
+  border-radius: 8px; /* Rounded corners */
+  color: #ffcc00; /* Yellow text color */
+  text-align: center; /* Centers the text */
+  text-transform: uppercase; /* Optional: Makes the text uppercase */
+  font-weight: bold; /* Bold text */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth hover effect */
+}
+
+.cta-box:hover {
+  background-color: #ffcc00; /* Yellow background on hover */
+  color: #000; /* Black text on hover */
+  cursor: pointer; /* Changes cursor to pointer */
 }
 
 @media (max-width: 768px) {
@@ -242,3 +272,4 @@ p.copyright {
 .skip-link:focus {
   top: 0;
 }
+
