@@ -1,4 +1,5 @@
 const invModel = require("../models/inventory-model")
+const { pool } = require("../database/") // Add this line to access the database pool
 const Util = {}
 
 /* ************************
@@ -45,6 +46,26 @@ Util.buildClassificationGrid = async function(data) {
 }
 
 /* **************************************
+ * Build classification dropdown list HTML
+ * ************************************ */
+Util.buildClassificationList = async function(classification_id = null) {
+  let data = await invModel.getClassifications();
+  let classificationList = '<select name="classification_id" id="classificationList" required>';
+  classificationList += '<option value="">Choose a Classification</option>';
+  
+  data.rows.forEach(row => {
+    classificationList += `<option value="${row.classification_id}"`;
+    if (classification_id != null && row.classification_id == classification_id) {
+      classificationList += " selected";
+    }
+    classificationList += `>${row.classification_name}</option>`;
+  });
+  
+  classificationList += '</select>';
+  return classificationList;
+}
+
+/* **************************************
  * Build ONLY vehicle content HTML
  * (No layout/header/footer)
  * ************************************ */
@@ -69,6 +90,20 @@ Util.buildVehicleDetailView = function(vehicle) {
       <div class="description">${vehicle.inv_description}</div>
     </div>
   </section>`
+}
+
+/* ************************
+ * Check if email exists in DB
+ ************************** */
+Util.checkExistingEmail = async function(account_email) {
+  try {
+    const sql = "SELECT * FROM account WHERE account_email = $1"
+    const email = await pool.query(sql, [account_email])
+    return email.rowCount > 0
+  } catch (error) {
+    console.error("checkExistingEmail error: " + error)
+    return false // Return false if there's an error to fail safely
+  }
 }
 
 /* ************************

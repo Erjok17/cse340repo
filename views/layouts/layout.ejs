@@ -5,18 +5,36 @@
 </head>
 <body>
     <div id="wrapper">
-        <%- include('../partials/header') %>
+        <!-- Banner Section -->
+        <div class="banner-container">
+            <img src="/images/cse340-banner.jpg" alt="CSE 340 Banner" class="banner-img">
+            <div class="banner-text">
+                <h1>CSE 340 - Web Backend Development</h1>
+                <p>Building secure, validated web applications</p>
+            </div>
+        </div>
+
+        <!-- Original Header with Account Links -->
+        <header class="main-header">
+            <h1>CSE Motors</h1>
+            <% if (typeof loggedin !== 'undefined' && loggedin) { %>
+                <div class="account-links">
+                    <a href="/account">My Account</a>
+                    <a href="/account/logout">Logout</a>
+                </div>
+            <% } else { %>
+                <a href="/account/login" class="account-link">My Account</a>
+            <% } %>
+            <a href="#main-content" class="skip-link">Skip to main content</a>
+        </header>
+
         <%- include('../partials/navigation') %>
 
         <main id="main-content">
-            <%- body %> <!-- This injects the content from index.ejs -->
+            <%- body %>
         </main>
 
         <%- include('../partials/footer') %>
     </div>
 </body>
 </html>
-
-
-
-

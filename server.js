@@ -3,9 +3,39 @@ const expressLayouts = require("express-ejs-layouts");
 const path = require("path");
 const baseController = require("./controllers/baseController");
 const inventoryRoute = require("./routes/inventoryRoute");
+const accountRoute = require("./routes/accountRoute"); // NEW: Added account route
 const utilities = require('./utilities');
+const session = require("express-session")
+const pool = require('./database/')
+const bodyParser = require('body-parser');
 
 const app = express();
+
+
+
+/* ***********************
+ * Middleware
+ * ************************/
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+
+
+
+
+// Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
 
 // View Engine and Templates
 app.set("view engine", "ejs");
@@ -15,12 +45,13 @@ app.set("layout", "layouts/layout");
 
 // Middleware
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 // Routes
 app.get("/", utilities.handleErrors(baseController.buildHome));
 app.use("/inv", inventoryRoute);
+app.use("/account", accountRoute); // NEW: Added account route
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
@@ -59,3 +90,5 @@ app.listen(port, () => {
   console.log(`Server running on port ${port}`);
   console.log(`Visit http://localhost:${port}`);
 });
+ 
+

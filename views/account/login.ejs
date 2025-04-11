@@ -1,0 +1,61 @@
+<main>
+    <h1><%= title %></h1>
+    <%- messages() %>
+
+    <% if (errors && errors.length > 0) { %>
+        <div class="alert alert-danger">
+          <ul>
+            <% errors.forEach(error => { %>
+              <li><%= error.msg %></li>
+            <% }) %>
+          </ul>
+        </div>
+    <% } %>
+  
+    <form action="/account/login" method="post" class="form">
+      <!-- Email -->
+      <label for="account_email">Email:</label>
+      <input 
+        type="email" 
+        id="account_email" 
+        name="account_email" 
+        required
+        placeholder="example@domain.com"
+        value="<%= typeof account_email !== 'undefined' ? account_email : '' %>">
+  
+      <!-- Password -->
+      <label for="account_password">Password:</label>
+      <div class="password-requirements">
+        Must be at least 12 characters with:
+        <ul>
+          <li>1 uppercase letter</li>
+          <li>1 lowercase letter</li>
+          <li>1 number</li>
+          <li>1 special character</li>
+        </ul>
+      </div>
+      <input 
+        type="password" 
+        id="account_password" 
+        name="account_password" 
+        required
+        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"
+        title="Must contain at least 12 characters, including uppercase, lowercase, number, and special character">
+      
+      <!-- Password Toggle -->
+      <button type="button" id="togglePassword">Show Password</button>
+      
+      <!-- Submit -->
+      <button type="submit">Login</button>
+    </form>
+  
+    <p class="register-link">Don't have an account? <a href="/account/register">Register here</a></p>
+</main>
+
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function() {
+      const passwordField = document.getElementById('account_password');
+      passwordField.type = passwordField.type === 'password' ? 'text' : 'password';
+      this.textContent = passwordField.type === 'password' ? 'Show Password' : 'Hide Password';
+    });
+</script>
