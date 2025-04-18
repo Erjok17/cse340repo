@@ -1,0 +1,112 @@
+<main class="edit-inventory-form">
+       <h1>Edit <%= inv_make %> <%= inv_model %></h1>
+       <%- messages() %>
+       
+       <% if (errors && errors.length > 0) { %>
+         <div class="alert alert-danger">
+           <ul>
+             <% errors.forEach(error => { %>
+               <li><%= error.msg %></li>
+             <% }) %>
+           </ul>
+         </div>
+       <% } %>
+     
+       <form action="/inv/update" method="post" class="form">
+         <input type="hidden" name="inv_id" value="<%= inv_id %>">
+         
+         <!-- Classification -->
+         <div class="form-group">
+           <label for="classification_id">Classification:</label>
+           <%- classificationSelect %>
+         </div>
+         
+         <!-- Make/Model/Year Row -->
+         <div class="form-row">
+           <div class="form-group">
+             <label for="inv_make">Make:</label>
+             <input type="text" name="inv_make" id="inv_make" required
+                    value="<%= inv_make %>">
+           </div>
+           
+           <div class="form-group">
+             <label for="inv_model">Model:</label>
+             <input type="text" name="inv_model" id="inv_model" required
+                    value="<%= inv_model %>">
+           </div>
+           
+           <div class="form-group">
+             <label for="inv_year">Year:</label>
+             <input type="number" name="inv_year" id="inv_year" 
+                    min="1900" max="<%= new Date().getFullYear() + 1 %>"
+                    value="<%= inv_year %>" required>
+           </div>
+         </div>
+         
+         <!-- Image Paths -->
+         <div class="form-row">
+           <div class="form-group">
+             <label for="inv_image">Image Path:</label>
+             <input type="text" name="inv_image" id="inv_image" required
+                    value="<%= inv_image %>">
+             <div class="image-preview">
+               <img src="<%= inv_image %>" alt="Vehicle Preview" onerror="this.style.display='none'">
+             </div>
+           </div>
+           
+           <div class="form-group">
+             <label for="inv_thumbnail">Thumbnail Path:</label>
+             <input type="text" name="inv_thumbnail" id="inv_thumbnail" required
+                    value="<%= inv_thumbnail %>">
+           </div>
+         </div>
+         
+         <!-- Price/Miles/Color -->
+         <div class="form-row">
+           <div class="form-group">
+             <label for="inv_price">Price:</label>
+             <div class="price-input">
+               <input type="number" name="inv_price" id="inv_price" step="0.01" required
+                      value="<%= inv_price %>">
+             </div>
+           </div>
+           
+           <div class="form-group">
+             <label for="inv_miles">Miles:</label>
+             <input type="number" name="inv_miles" id="inv_miles" min="0" required
+                    value="<%= inv_miles %>">
+           </div>
+           
+           <div class="form-group">
+             <label for="inv_color">Color:</label>
+             <input type="text" name="inv_color" id="inv_color" required
+                    value="<%= inv_color %>">
+           </div>
+         </div>
+         
+         <!-- Description -->
+         <div class="form-group">
+           <label for="inv_description">Description:</label>
+           <textarea name="inv_description" id="inv_description" required><%= inv_description %></textarea>
+         </div>
+         
+         <!-- Form Actions -->
+         <div class="btn-group">
+           <button type="submit" class="btn btn-primary">Update Vehicle</button>
+           <a href="/inv/" class="btn btn-secondary">Cancel</a>
+         </div>
+       </form>
+
+       <input type="hidden" name="inv_id"
+       <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+       <% } %>>
+   </main>
+
+   <script>
+       // Simple image preview
+       document.getElementById('inv_image').addEventListener('input', function(e) {
+         const preview = this.nextElementSibling.querySelector('img');
+         preview.src = e.target.value;
+         preview.style.display = e.target.value ? 'block' : 'none';
+       });
+     </script>

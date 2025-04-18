@@ -1,4 +1,11 @@
 <nav>
-    <%- nav %>
+    <% if (typeof nav !== 'undefined') { %>
+        <%- nav %>
+    <% } else { %>
+        <!-- Default navigation when nav isn't provided -->
+        <ul>
+            <li><a href="/">Home</a></li>
+        </ul>
+    <% } %>
 </nav>
 

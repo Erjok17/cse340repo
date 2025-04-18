@@ -11,8 +11,19 @@
         <% if (accountData.account_type === 'Employee' || accountData.account_type === 'Admin') { %>
           <li><a href="/inv/add-classification">Add New Classification</a></li>
           <li><a href="/inv/add-inventory">Add New Vehicle</a></li>
+          <a href="/inv/edit/<%= item.inv_id %>" class="btn btn-sm btn-warning">Modify</a>
+          <a href="/inv/delete/<%= item.inv_id %>" class="btn btn-sm btn-danger">Delete</a>
         <% } %>
         
+
+        <h2>Manage Inventory</h2>
+        <p>Choose a Classification to see those items</p>
+        <% classificationSelect %> <!-- This will be replaced with the actual classification select options -->
+        
+        <table id = "InventoryDisplay"></table>
+
+        <noscript>JavaScript must be enabled to use this page.</noscript>
+
         <!-- Basic options for all logged-in users -->
         <li><a href="/inv/">View Inventory</a></li>
         <li><a href="/account/update">Update Account</a></li>
@@ -33,3 +44,5 @@
     <p>Please <a href="/account/login">log in</a> to access management features.</p>
   <% } %>
 </main>
+
+<script src="../../js/inventory.js"></script>

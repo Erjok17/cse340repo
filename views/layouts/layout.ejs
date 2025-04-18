@@ -7,7 +7,7 @@
     <div id="wrapper">
         <!-- Banner Section -->
         <div class="banner-container">
-            <img src="/images/cse340-banner.jpg" alt="CSE 340 Banner" class="banner-img">
+            <img src="/images/cse340-banner.jpg" alt="CSE 340 Banner" class="banner-img" onerror="this.style.display='none'">
             <div class="banner-text">
                 <h1>CSE 340 - Web Backend Development</h1>
                 <p>Building secure, validated web applications</p>
@@ -31,9 +31,19 @@
         <%- include('../partials/navigation') %>
 
         <main id="main-content">
-            <%- body %>
+            <% if (typeof body !== 'undefined') { %>
+                <%- body %>
+            <% } else if (typeof content !== 'undefined') { %>
+                <!-- Fallback for alternative content variable -->
+                <%- content %>
+            <% } else { %>
+                <div class="default-content">
+                    <h2>Welcome to CSE Motors</h2>
+                    <p>Content could not be loaded. Please try again later.</p>
+                </div>
+            <% } %>
         </main>
-
+        
         <%- include('../partials/footer') %>
     </div>
 </body>

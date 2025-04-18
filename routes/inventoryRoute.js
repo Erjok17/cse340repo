@@ -29,4 +29,28 @@ router.post(
   utilities.handleErrors(invController.addInventory)
 );
 
+
+
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+router.get('/edit/:inventory_id', utilities.handleErrors(invController.buildEditInventory));
+router.post(
+'/update',
+inventoryValidate.inventoryRules(),
+inventoryValidate.checkInventoryData,
+utilities.handleErrors(invController.updateInventory)
+);
+
+/* ***************************
+ * Deliver Delete Confirmation View
+ * ************************** */
+router.get('/delete/:inv_id', 
+  utilities.checkLogin,
+  utilities.handleErrors(invController.buildDeleteConfirm)
+);
+
+router.post('/delete', 
+  utilities.checkLogin,
+  utilities.handleErrors(invController.deleteInventory)
+);
 module.exports = router;

@@ -10,6 +10,12 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin));
 // NEW registration route
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
 
+
+
+router.get(
+  "/",
+  utilities.handleErrors(accountController.buildAccountManagement)
+);
 // Added this below existing routes
 router.post(
   '/register',
@@ -18,6 +24,12 @@ router.post(
   utilities.handleErrors(accountController.registerAccount)
 );
 
-
+// Process the login request
+router.post(
+  "/login",
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accountController.accountLogin)
+)
 
 module.exports = router;
