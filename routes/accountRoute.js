@@ -30,6 +30,38 @@ router.post(
   regValidate.loginRules(),
   regValidate.checkLoginData,
   utilities.handleErrors(accountController.accountLogin)
-)
+); 
+
+// New comers
+router.get(
+  "/update/:account_id",
+  utilities.checkLogin,
+  utilities.checkAccountAccess, 
+  utilities.handleErrors(accountController.buildUpdateView)
+);
+
+router.post(
+  "/update/:account_id",
+  utilities.checkLogin,
+  utilities.checkAccountAccess,
+  regValidate.updateRules(),
+  regValidate.checkUpdateData,
+  utilities.handleErrors(accountController.updateAccount)
+);
+
+router.post(
+  "/update-password/:account_id",
+  utilities.checkLogin,
+  utilities.checkAccountAccess,
+  regValidate.passwordRules(),
+  regValidate.checkPasswordData,
+  utilities.handleErrors(accountController.updatePassword)
+);
+
+
+router.get(
+  "/logout",
+  utilities.handleErrors(accountController.logout)
+);
 
 module.exports = router;

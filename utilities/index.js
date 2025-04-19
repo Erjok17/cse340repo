@@ -161,4 +161,17 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
+ /* ****************************************
+*  Check Account Access (verify user owns the account)
+* *************************************** */
+Util.checkAccountAccess = async (req, res, next) => {
+  const requestedAccountId = parseInt(req.params.account_id);
+  const userAccountId = res.locals.accountData?.account_id;
+  
+  if (requestedAccountId !== userAccountId) {
+    req.flash("notice", "You can only update your own account.");
+    return res.redirect("/account/");
+  }
+  next();
+};
 module.exports = Util

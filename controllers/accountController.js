@@ -125,25 +125,138 @@ async function accountLogin(req, res) {
   }
 }
 
-//* ****************************************
-// *  Deliver Account Management View
-// * *************************************** */
-const buildAccountManagement = (req, res) => {
-  res.render("account/accountManagement", {
-      title: "Account Management",
-      flashMessage: req.flash("message"),
-      errors: req.flash("errors"),
-  });
-};
 
-// * ****************************************
-// *  module.exports
-// * *************************************** */
+// Add these new functions to your existing controller:
 
+/* ****************************************
+*  Deliver Account Update View
+* *************************************** */
+async function buildUpdateView(req, res) {
+  try {
+    let nav = await utilities.getNav();
+    const account_id = parseInt(req.params.account_id);
+    
+    const accountData = await accountModel.getAccountById(account_id);
+    if (!accountData) {
+      req.flash("notice", "Account not found.");
+      return res.redirect("/account/");
+    }
+
+    res.render("account/update", {
+      title: "Update Account",
+      nav,
+      errors: null,
+      account: accountData // Changed to pass as single object
+    });
+  } catch (error) {
+    console.error("buildUpdateView error:", error);
+    req.flash("notice", "Sorry, the server encountered an error.");
+    res.redirect("/account/");
+  }
+}
+/* ****************************************
+*  Process Account Update
+* *************************************** */
+async function updateAccount(req, res) {
+  try {
+    let nav = await utilities.getNav();
+    const account_id = parseInt(req.params.account_id);
+    const { account_firstname, account_lastname, account_email } = req.body;
+
+    const updateResult = await accountModel.updateAccount(
+      account_id,
+      account_firstname,
+      account_lastname,
+      account_email
+    );
+
+    if (updateResult) {
+      // Refresh account data in JWT
+      const accountData = await accountModel.getAccountById(account_id);
+      delete accountData.account_password;
+      const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 });
+      
+      res.cookie("jwt", accessToken, { 
+        httpOnly: true, 
+        secure: process.env.NODE_ENV !== 'development',
+        maxAge: 3600 * 1000 
+      });
+      
+      req.flash("notice", "Your account was successfully updated.");
+      return res.redirect("/account/");
+    } else {
+      throw new Error("Update failed");
+    }
+  } catch (error) {
+    console.error("updateAccount error:", error);
+    req.flash("notice", "Sorry, the update failed.");
+    return res.redirect(`/account/update/${req.params.account_id}`);
+  }
+}
+
+/* ****************************************
+*  Process Password Change
+* *************************************** */
+async function updatePassword(req, res) {
+  try {
+    const account_id = parseInt(req.params.account_id);
+    const { account_password } = req.body;
+
+    let hashedPassword = await bcrypt.hash(account_password, 10);
+    const updateResult = await accountModel.updatePassword(account_id, hashedPassword);
+
+    if (updateResult) {
+      req.flash("notice", "Your password was successfully updated.");
+    } else {
+      throw new Error("Password update failed");
+    }
+  } catch (error) {
+    console.error("updatePassword error:", error);
+    req.flash("notice", "Sorry, the password update failed.");
+  }
+  return res.redirect(`/account/update/${req.params.account_id}`);
+}
+/* ****************************************
+*  Process Logout
+* *************************************** */
+async function logout(req, res) {
+  res.clearCookie("jwt");
+  req.flash("notice", "You have been logged out.");
+  res.redirect("/");
+}
+
+/* ****************************************
+*  Enhanced Account Management View
+* *************************************** */
+async function buildAccountManagement(req, res) {
+  let nav = await utilities.getNav();
+  const accountData = res.locals.accountData;
+  
+  const viewData = {
+    title: "Account Management",
+    nav,
+    errors: null,
+    account_firstname: accountData.account_firstname,
+    account_type: accountData.account_type
+  };
+
+  // Add inventory management link for Employees/Admins
+  if (accountData.account_type === "Employee" || accountData.account_type === "Admin") {
+    viewData.inventoryManagement = true;
+  }
+
+  res.render("account/accountManagement", viewData);
+}
+
+// Update module.exports to include new functions
 module.exports = {
   buildLogin,
   buildRegister,
   registerAccount,
   accountLogin,
-  buildAccountManagement
+  buildAccountManagement,
+  buildUpdateView,
+  updateAccount,
+  updatePassword,
+  logout
 };

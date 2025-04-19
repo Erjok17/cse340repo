@@ -1,7 +1,6 @@
 <section class="frame">
     <h1>Account Management</h1>
-
-    <%- messages() %> <!-- Display flash messages -->
+    <%- messages() %>
 
     <% if (errors) { %>
         <ul class="notice">
@@ -11,13 +10,32 @@
         </ul>
     <% } %>
 
-    <p>You're logged in.</p>
+    <!-- Task 3: Dynamic Greeting Based on Account Type -->
+    <% if (accountData) { %>
+        <h2>Welcome <%= accountData.account_firstname %></h2>
+        
+        <!-- Inventory Management Section (Only for Employees/Admins) -->
+        <% if (['Employee','Admin'].includes(accountData.account_type)) { %>
+            <h3>Inventory Management</h3>
+            <p><a href="/inv">Manage Inventory</a></p>
+        <% } %>
 
-    <div class="account-options">
-        <p>Manage your account:</p>
-        <ul>
-            <li><a href="/account/register">Register a New Account</a></li>
-            <li><a href="/account/logout">Logout</a></li>
-        </ul>
-    </div>
+        <!-- Update Account Link (Visible to all logged-in users) -->
+        <div class="account-options">
+            <p>Manage your account:</p>
+            <ul>
+                <li>
+                    <a href="/account/update/<%= accountData.account_id %>">
+                        Update Account Information
+                    </a>
+                </li>
+                <% if (accountData.account_type === 'Client') { %>
+                    <!-- Client-specific options can go here -->
+                <% } %>
+                <li><a href="/account/logout">Logout</a></li>
+            </ul>
+        </div>
+    <% } else { %>
+        <p>You're not currently logged in.</p>
+    <% } %>
 </section>
