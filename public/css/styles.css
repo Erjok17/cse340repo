@@ -1076,3 +1076,143 @@ input, textarea, select {
     background-color: #c82333;
   }
 
+/*my additions*/
+/* Favorite Button Styles */
+.favorite-controls {
+  margin: 1rem 0;
+  text-align: right;
+}
+
+.favorite-btn {
+  background: #fff;
+  border: 2px solid #e63946;
+  color: #e63946;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.favorite-btn:hover {
+  background: #e63946;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.favorite-btn:active {
+  transform: translateY(0);
+}
+
+/* Favorites Page Styles */
+.favorites-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.favorites-title {
+  color: #1d3557;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.favorite-item {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.favorite-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.favorite-thumbnail {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.favorite-details {
+  padding: 1.2rem;
+}
+
+.favorite-make-model {
+  font-size: 1.2rem;
+  color: #1d3557;
+  margin-bottom: 0.5rem;
+}
+
+.favorite-price {
+  font-weight: bold;
+  color: #e63946;
+  font-size: 1.1rem;
+}
+
+.favorite-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.favorite-view-btn {
+  background: #1d3557;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.favorite-view-btn:hover {
+  background: #457b9d;
+}
+
+.favorite-remove-btn {
+  background: #e63946;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.favorite-remove-btn:hover {
+  background: #d62839;
+}
+
+/* Empty State */
+.empty-favorites {
+  text-align: center;
+  padding: 3rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.empty-favorites p {
+  color: #6c757d;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.empty-favorites a {
+  color: #1d3557;
+  text-decoration: underline;
+}

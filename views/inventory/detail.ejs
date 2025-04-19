@@ -1,4 +1,30 @@
-<!-- views/inventory/detail.ejs -->
 <main class="vehicle-detail-view">
-    <%- detailHTML %>
+  <% if (loggedin) { %>
+      <div class="favorite-controls">
+        <form action="/favorites/save" method="POST">
+          <input type="hidden" name="inv_id" value="<%= inv_id %>">
+          <button type="submit" class="favorite-btn">
+              <%= isFavorite ? '❤️ Remove Favorite' : '♡ Add Favorite' %>
+          </button>
+      </form>
+      </div>
+
+      <div class="favorite-controls">
+        <form action="/favorites/save" method="POST">
+            <input type="hidden" name="inv_id" value="<%= inv_id %>">
+            <button type="submit" class="favorite-btn">
+                <% if (isFavorite) { %>
+                    ❤️ Remove Favorite
+                <% } else { %>
+                    ♡ Add Favorite
+                <% } %>
+            </button>
+        </form>
+    </div>
+  <% } %>
+  
+  
+  <%- detailHTML %>
 </main>
+  
+ 

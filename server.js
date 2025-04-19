@@ -9,6 +9,9 @@ const session = require("express-session")
 const pool = require('./database/');
 const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
+const favoritesRouter = require('./routes/favoritesRoute');
+
+
 
 const app = express();
 
@@ -54,6 +57,7 @@ app.use(utilities.checkJWTToken)
 app.get("/", utilities.handleErrors(baseController.buildHome));
 app.use("/inv", inventoryRoute);
 app.use("/account", accountRoute); // NEW: Added account route
+app.use('/favorites', favoritesRouter);
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {

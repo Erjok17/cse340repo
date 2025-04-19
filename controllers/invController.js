@@ -43,17 +43,29 @@ invCont.buildByInvId = async function (req, res, next) {
     const detailHTML = await utilities.buildVehicleDetailView(vehicleData);
     let nav = await utilities.getNav();
 
+    // Add favorites check
+    let isFavorite = false;
+    if (res.locals.loggedin) {
+      const favoritesModel = require('../models/favorites-model');
+      isFavorite = await favoritesModel.checkFavorite(
+        res.locals.accountData.account_id, 
+        invId
+      );
+    }
+
     res.render("./inventory/detail", {
       title: `${vehicleData.inv_year} ${vehicleData.inv_make} ${vehicleData.inv_model}`,
       nav,
       detailHTML,
+      inv_id: invId, // Make sure this is passed to the view
+      loggedin: res.locals.loggedin, // Pass login status
+      isFavorite: isFavorite // Pass favorite status
     });
   } catch (error) {
     console.error("Error in buildByInvId:", error);
     next(error);
   }
 };
-
 /* ***************************
  *  Build management view
  * ************************** */
